@@ -1,6 +1,6 @@
 # Minecraft Bedrock Edition: Nifty Building Tool
 
-The Nifty Building Tool is designed to help turn lists of building-related commands into an easy-to-use AND easy-to-run NBT.`By using (usually) only dozens of NPCs as opposed to thousands of minecarts, the results of this file are designed to run smoothly on the common person's computer. Finishing a build using this program will only take a minute, usually less.
+The Nifty Building Tool is designed to help turn lists of building-related commands into an easy-to-use AND easy-to-run NBT. By using (usually) only dozens of NPCs as opposed to thousands of minecarts, the results of this file are designed to run smoothly on the common person's computer. Finishing a build using this program will only take a minute, usually less.
 
 <h3>Instructions</h3>
             <ul>
