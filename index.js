@@ -11,18 +11,20 @@ function getFile(event) {
 function processFile(file) {
     readFileContent(file).then(content => {
         const commands = getUsefulCommands(content);
-        let commands_per_npc = parseInt(document.getElementById('input-number').value);
-        let nbt_name = document.getElementById('input-text').value.trim();
+        let commands_per_npc = parseInt(document.getElementById('commands-per-npc').value);
+        let nbt_name = document.getElementById('nbt-title').value.trim();
+        let file_name;
         if (nbt_name === "") {
-            nbt_name = "NiftyBuildingTool_Output.txt";
+            file_name = "NiftyBuildingTool_Output.txt";
+            nbt_name = "Unnamed Build"
         } else {
-            nbt_name = "NiftyBuildingTool_" + nbt_name + ".txt";
+            file_name = "NiftyBuildingTool_" + nbt_name + ".txt";
         }
         if (isNaN(commands_per_npc) || commands_per_npc <= 0) {
             commands_per_npc = 346;
         }
         let curSec = 0;
-        let NBTdata = getBlockOpener();
+        let NBTdata = getBlockOpener(nbt_name);
         let NPCCount = Math.ceil(commands.length / commands_per_npc);
         for (var i = 0; i < commands.length; i += commands_per_npc) {
             curSec++;
@@ -32,11 +34,11 @@ function processFile(file) {
             // Need to add special commands per NPC
             NPCCommandList.unshift(`/tickingarea add ~ ~ ~ 4 NPCCOMMANDS`);
             NPCCommandList.push(`/tickingarea remove NPCCOMMANDS`);
-            NPCCommandList.push(`/dialogue open @e[tag=NPCCOMMANDS${nextNPC},type=NPC] @initiator`);
+            NPCCommandList.push(`/dialogue open @e[tag="${nbt_name}${nextNPC}",type=NPC] @initiator`);
             NPCCommandList.push(`/kill @s`);
   
             // Build meat and potatoes of the NPC
-            NBTdata += getNPCOpener(curSec);
+            NBTdata += getNPCOpener(curSec, nbt_name);
             NBTdata += NPCCommandList.map(x => commandToNBT(x.trim())).join(",");
             NBTdata += getNPCCloser();
   
@@ -46,7 +48,7 @@ function processFile(file) {
             }
         }
         NBTdata += getBlockCloser();
-        download(nbt_name, NBTdata);
+        download(file_name, NBTdata);
     }).catch(error => console.log(error));
 }
 
@@ -65,20 +67,20 @@ function getUsefulCommands(content) {
     });
 }
 
-function getBlockOpener() {
-    return '{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{Occupants:[';
+function getBlockOpener(nbt_name) {
+    return `{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{display:{Lore:["Â§gÂ§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},Occupants:[`;
   }
   
 function getBlockCloser() {
     return ']}}';
 }
 
-function getNPCOpener(section) {
-    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Tags:["NPCCOMMANDS${section}"],Actions:"[{"button_name" : "NPCCommands${section}","data" : [`;
+function getNPCOpener(section, nbt_name) {
+    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Variant:18,CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
 }
 
 function getNPCCloser() {
-    return '],"mode" : 0,"text" : "","type" : 1}]",InterativeText:"Created by Brutus314 and Clawsky123.",Persistent:1b,Variant:18},TicksLeftToStay:0}';
+    return `],"mode" : 0,"text" : "","type" : 1}]",InterativeText:"Â§gÂ§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."},TicksLeftToStay:0}`;
 }
 
 function commandToNBT(command) {
