@@ -70,7 +70,7 @@ function getUsefulCommands(content) {
 }
 
 function getBlockOpener(nbt_name) {
-    return `{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{display:{Lore:["Â§gÂ§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},Occupants:[`;
+    return `{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{display:{Lore:["Created using the Nifty Building Tool\nBy Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},Occupants:[`;
   }
   
 function getBlockCloser() {
@@ -78,11 +78,11 @@ function getBlockCloser() {
 }
 
 function getNPCOpener(section, nbt_name) {
-    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Variant:18,CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
+    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Variant:18,RawtextName:"${nbt_name}",CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
 }
 
 function getNPCCloser() {
-    return `],"mode" : 0,"text" : "","type" : 1}]",InterativeText:"Â§gÂ§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."},TicksLeftToStay:0}`;
+    return `],"mode" : 0,"text" : "","type" : 1}]",InterativeText:"Â§4Â§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."},TicksLeftToStay:0}`;
 }
 
 function commandToNBT(command) {
