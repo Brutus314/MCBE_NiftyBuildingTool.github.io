@@ -32,8 +32,8 @@ function processFile(file) {
             let nextNPC = (curSec === NPCCount ? 1 : curSec + 1);
   
             // Need to add special commands per NPC
-            NPCCommandList.unshift(`/tickingarea add ~ ~ ~ 4 NPCCOMMANDS`);
-            NPCCommandList.push(`/tickingarea remove NPCCOMMANDS`);
+            NPCCommandList.unshift(`/tickingarea add circle ~ ~ ~ 4 NIFTYBUILDINGTOOL`);
+            NPCCommandList.push(`/tickingarea remove NIFTYBUILDINGTOOL`);
             if (NPCCount > 1) {
                 NPCCommandList.push(`/dialogue open @e[tag="${nbt_name}${nextNPC}",type=NPC] @initiator`);
             }
