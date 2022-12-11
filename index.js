@@ -81,16 +81,16 @@ function getUsefulCommands(content) {
 
 // Block functions need run one time, put NPCs between
 function getBlockOpener(nbt_name) {
-    return `{Block:{name:"minecraft:moving_block",states:{},version:17959425},Count:1b,Damage:0s,Name:"minecraft:moving_block",WasPickedUp:0b,tag:{display:{Lore:["Created using the Nifty Building Tool\nBy Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},movingBlock:{name:"minecraft:sea_lantern",states:{},version:17879555},movingEntity:{Occupants:[`;
+    return `{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{display:{Lore:["Created using the Nifty Building Tool\nBy Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},Occupants:[`;
 }
   
 function getBlockCloser() {
-    return '],id:"Beehive"}}}';
+    return ']}}';
 }
 
 // NPC commands need run once per NPC, put that NPC's commands between them
 function getNPCOpener(section, nbt_name) {
-    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Variant:18,RawtextName:"${nbt_name}",CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
+    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Pos:[],Variant:18,definitions:["+minecraft:npc"],RawtextName:"${nbt_name}",CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
 }
 
 function getNPCCloser() {
