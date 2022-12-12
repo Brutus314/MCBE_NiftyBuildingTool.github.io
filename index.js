@@ -81,11 +81,11 @@ function getUsefulCommands(content) {
 
 // Block functions need run one time, put NPCs between
 function getBlockOpener(nbt_name) {
-    return `{Block:{name:"minecraft:beehive",states:{direction:0,honey_level:0},version:17959425},Count:1b,Damage:0s,Name:"minecraft:beehive",Slot:13b,WasPickedUp:0b,tag:{display:{Lore:["Created using the Nifty Building Tool\nBy Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},Occupants:[`;
+    return `{Block:{name:"minecraft:moving_block",states:{},version:17959425},Count:1b,Damage:0s,Name:"minecraft:moving_block",WasPickedUp:0b,tag:{display:{Lore:["Created using the Nifty Building Tool\nBy Brutus314 and Clawsky123."],Name:"Â§gÂ§l${nbt_name}"},movingBlock:{name:"minecraft:sea_lantern",states:{},version:17879555},movingEntity:{Occupants:[`;
 }
   
 function getBlockCloser() {
-    return ']}}';
+    return '],id:"Beehive"}}}';
 }
 
 // NPC commands need run once per NPC, put that NPC's commands between them
