@@ -90,11 +90,11 @@ function getBlockCloser() {
 
 // NPC commands need run once per NPC, put that NPC's commands between them
 function getNPCOpener(section, nbt_name) {
-    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Pos:[],Variant:18,definitions:["+minecraft:npc"],RawtextName:"${nbt_name}",CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{"button_name" : "Build Section ${section}","data" : [`;
+    return `{ActorIdentifier:"minecraft:npc<>",SaveData:{Persistent:1b,Pos:[],Variant:18,definitions:["+minecraft:npc"],RawtextName:"${nbt_name}",CustomName:"${nbt_name}",CustomNameVisible:1b,Tags:["${nbt_name}${section}","NiftyBuildingTool"],Actions:"[{\\"button_name\\" : \\"Build Section ${section}\\",\\"data\\" : [`;
 }
 
 function getNPCCloser() {
-    return `],"mode" : 0,"text" : "","type" : 1}]",InterativeText:"Â§4Â§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."},TicksLeftToStay:0}`;
+    return `],\\"mode\\" : 0,\\"text\\" : \\"\\",\\"type\\" : 1}]",InterativeText:"Â§4Â§lCreated using the Nifty Building Tool by Brutus314 and Clawsky123."},TicksLeftToStay:0}`;
 }
 
 // Commands are written in JSON in the NBT
@@ -102,7 +102,7 @@ function commandToNBT(command) {
     return JSON.stringify({
         cmd_line : command, 
         cmd_ver : 12
-    });
+    }).replace(/\\/g, `\\\\`).replace(/"/g, `\\"`);
 }
 
 // Just a function that downloads a file containing the passed in text
